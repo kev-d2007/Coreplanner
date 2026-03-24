@@ -6,18 +6,52 @@
     <title>Coreplanner</title>
     <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
     <script type="text/javascript" src="loading-bar.js"></script>
-
     <script>
-        window.onload = function() {
-            for (let i = 1; i <= 7; i++) {
-                window['bar_' + i] = new ldBar("#circle_" + i);
-            }
-        };
+    let animationTargets = {};
+    let animationFrames = {};
 
-        function updateCircle(inputElement, weekIndex) {
-            const value = parseInt(inputElement.value) || 0;
-            window['bar_' + weekIndex].set(value);
+    window.onload = function() {
+        for (let i = 1; i <= 7; i++) {
+            window['bar_' + i] = new ldBar("#circle_" + i);
+            animationTargets[i] = 0;
+
+            //startwaarde 100% bij laden van pagina
+            animationTargets[i] = 100;
+            window['bar_' + i].set(100);
         }
+    };
+
+    function animateBar(index) {
+        cancelAnimationFrame(animationFrames[index]);
+
+        const bar = window['bar_' + index];
+        const current = bar.value || 0;
+        const target = animationTargets[index];
+
+        const diff = target - current;
+
+        if (Math.abs(diff) < 0.1) {
+            bar.set(target);
+            return;
+        }
+
+        // Snelheid verandering
+        const next = current + diff * 0.07; // 0.15 = iets te snel
+
+        bar.set(next);
+
+        animationFrames[index] = requestAnimationFrame(() => animateBar(index));
+    }
+
+    function updateCircle(inputElement, weekIndex) {
+        const value = parseInt(inputElement.value) || 0;
+
+        // Nieuwe target instellen
+        animationTargets[weekIndex] = value;
+
+        // Animatie starten
+        animateBar(weekIndex);
+    }
     </script>
 </head>
 <body>
