@@ -44,12 +44,18 @@
     }
 
     function updateCircle(inputElement, weekIndex) {
-        const value = parseInt(inputElement.value) || 0;
+        let value = inputElement.value;
 
-        // Nieuwe target instellen
+        // Als het veld leeg is → terug naar 100
+        if (value === "") {
+            animationTargets[weekIndex] = 100;
+            animateBar(weekIndex);
+            return;
+        }
+
+        // Normale invoer
+        value = parseInt(value) || 0;
         animationTargets[weekIndex] = value;
-
-        // Animatie starten
         animateBar(weekIndex);
     }
     </script>
