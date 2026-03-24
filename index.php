@@ -8,14 +8,12 @@
     <script type="text/javascript" src="loading-bar.js"></script>
 
     <script>
-        // Maak ldBar instanties aan
         window.onload = function() {
             for (let i = 1; i <= 7; i++) {
                 window['bar_' + i] = new ldBar("#circle_" + i);
             }
         };
 
-        // Update cirkel live
         function updateCircle(inputElement, weekIndex) {
             const value = parseInt(inputElement.value) || 0;
             window['bar_' + weekIndex].set(value);
@@ -50,7 +48,6 @@
 </form>
 
 <?php
-// Genereert automatisch alle 7 cirkels
 progress_bar_circle();
 ?>
 
