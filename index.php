@@ -11,13 +11,14 @@
 include_once 'functions.php';
 include_once 'statistieken.php';
 
-// if (isset($_GET['logout'])) {
-//     logout_user();
-// }
 
 
 // deze funtie is voor het inloggen van de website. Alleen aanzetten als het op de server
 // staat, anders kan de verbinding met de database niet worden aangemaakt!!!
+
+// if (isset($_GET['logout'])) {
+//     logout_user();
+// }
 
 // if (is_logged_in()) {
 //     ?>
