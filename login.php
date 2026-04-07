@@ -83,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
     function toggleForms() {
-        // Verberg bericht bij wisselen
         const messageDiv = document.querySelector('.message');
         if (messageDiv) {
             messageDiv.style.display = 'none';

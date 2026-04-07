@@ -7,7 +7,7 @@ include_once 'db.php';
 
 function register_user($gebruikersnaam, $email, $wachtwoord) {
     $conn = db_connect();
-    if ($conn === null) return ["success" => false, "message" => "Database fout"];
+    if ($conn === null) return ["success" => false, "message" => "Er is iets fout gegaan tijdens het verbinden met de database"];
     
     try {
         $stmt = $conn->prepare("SELECT id FROM users WHERE gebruikersnaam = ?");
@@ -36,7 +36,7 @@ function register_user($gebruikersnaam, $email, $wachtwoord) {
 
 function login_user($user_input, $wachtwoord) {
     $conn = db_connect();
-    if ($conn === null) return ["success" => false, "message" => "Database fout"];
+    if ($conn === null) return ["success" => false, "message" => "Er is iets fout gegaan tijdens het verbinden met de database"];
     
     try {
         $stmt = $conn->prepare("SELECT id, gebruikersnaam, wachtwoord FROM users WHERE gebruikersnaam = ? OR email = ? LIMIT 1");
